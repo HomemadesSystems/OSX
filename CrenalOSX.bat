@@ -2065,10 +2065,11 @@ pause
 goto login
 :settings
 cls
-cmdMenuSel f870 "Personalization" "Product key settings" "exit"
+cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates"
 if %ERRORLEVEL% == 1 goto personalization
 if %ERRORLEVEL% == 2 goto activator
 if %ERRORLEVEL% == 3 goto desktop
+if %ERRORLEVEL% == 4 goto Updatesettings
 :personalization
 cls
 cmdMenuSel f870 "Color" "back" 
@@ -2140,4 +2141,51 @@ echo this will be your username for this session %User% Is this correct?
 set /p confirm=y-or-n
 
 if %confirm% == y goto guiselect
-if %ERRORLEVEL% == n goto newset
+if %confirm% == n goto newset
+:Updatesettings
+cls
+cmdMenuSel f870 "Reboot to system update loader" "back"
+if %ERRORLEVEL% == 1 goto updrebootfnccon
+if %ERRORLEVEL% == 2 goto settings
+:updrebootfnccon
+cls
+Echo Are You Sure?
+cmdMenuSel f870 "Yes" "No"
+if %ERRORLEVEL% == 1 goto updreboot
+if %ERRORLEVEL% == 2 goto Updatesettings
+:updreboot
+Echo Rebooting to Updater
+cd C:\CrenalOS\Versions\UPD
+cls
+Pause
+Echo Booting to CrenalOS Update enviroment
+Pause
+Please wait
+CrenalOS is loading files
+title Booting to updater Please Wait... 
+color a
+set load=
+set/a loadnum=0
+
+:Loading
+set load=%load%Û
+cls
+echo.
+echo CrenalOS is loading files Please Wait...
+echo ----------------------------------------------------------------------------------------------------
+echo %load%
+echo ----------------------------------------------------------------------------------------------------
+ping localhost -n 2 >nul
+
+set/a loadnum=%loadnum% +1
+if %loadnum%==100 goto Done
+
+goto Loading
+:Done
+echo.
+pause
+cls
+Title Updater
+Updater.bat
+
+
