@@ -2065,11 +2065,12 @@ pause
 goto login
 :settings
 cls
-cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates"
+cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates" "Reset"
 if %ERRORLEVEL% == 1 goto personalization
 if %ERRORLEVEL% == 2 goto activator
 if %ERRORLEVEL% == 3 goto desktop
 if %ERRORLEVEL% == 4 goto Updatesettings
+if %ERRORLEVEL% == 5 goto Systemreset
 :personalization
 cls
 cmdMenuSel f870 "Color" "back" 
@@ -2155,7 +2156,7 @@ if %ERRORLEVEL% == 1 goto updreboot
 if %ERRORLEVEL% == 2 goto Updatesettings
 :updreboot
 Echo Rebooting to Updater
-cd C:\CrenalOS\Versions\UPD
+cd C:\CrenalOS\Versions\Update+Recovery
 cls
 Pause
 Echo Booting to CrenalOS Update enviroment
@@ -2187,5 +2188,21 @@ pause
 cls
 Title Updater
 Updater.bat
+:Systemreset
+Echo THIS CANNOT BE UNDONE!
+Echo Are You Sure?
+cmdMenuSel f870 "Yes" "No"
+if %ERRORLEVEL% == 1 goto Factoryreset
+if %ERRORLEVEL% == 2 goto Settings
+:Factoryreset
+Echo Preparing to Reset Crenal OSX 
+cd C:\CrenalOS\Versions
+md OSXbackup
+echo Wait 10 seconds for robocopy to recognise the backup directory
+pause
+robocopy C:\CrenalOS\Versions\OSX C:\CrenalOS\Versions\OSXbackup
+Echo Files Backed up Successfuly
+cd Update+Recovery
+Reset.bat
 
 
