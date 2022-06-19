@@ -2125,12 +2125,7 @@ if %ERRORLEVEL% == 2 goto progman
 if %ERRORLEVEL% == 3 goto Stflmgr
 
 :vb5656234
-echo Please insert a valid CrenalOS Disk to continue
-echo OS version 10.0
-echo Disk made for operating system version [NO]
-echo os version required on disk [CrenalOS 6]
-cmd
-
+Cd C:\CrenalOS\Versions\Update+Recovery
 
 :Stflmgr
 call GUI_filemanager.bat
