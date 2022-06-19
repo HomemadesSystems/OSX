@@ -2126,7 +2126,7 @@ if %ERRORLEVEL% == 3 goto Stflmgr
 
 :vb5656234
 Cd C:\CrenalOS\Versions\Update+Recovery
-
+Recovery.bat
 :Stflmgr
 call GUI_filemanager.bat
 :newset
