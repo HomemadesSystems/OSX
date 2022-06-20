@@ -885,9 +885,9 @@ echo                                      1=restart  2=recovery
 pause
 
 set /p Choice=Command 
-if %Choice% == 1 goto BOOT
+if %Choice% == 1 goto Bios
 
-if %Choice% == 2 goto recovery
+if %Choice% == 2 goto vb5656234
 
 
 
@@ -2065,12 +2065,12 @@ pause
 goto login
 :settings
 cls
-cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates" "Reset"
+cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates" "Backup+Reset"
 if %ERRORLEVEL% == 1 goto personalization
 if %ERRORLEVEL% == 2 goto activator
 if %ERRORLEVEL% == 3 goto desktop
 if %ERRORLEVEL% == 4 goto Updatesettings
-if %ERRORLEVEL% == 5 goto Systemreset
+if %ERRORLEVEL% == 5 goto backupsettings
 :personalization
 cls
 cmdMenuSel f870 "Color" "back" 
@@ -2183,12 +2183,10 @@ pause
 cls
 Title Updater
 Updater.bat
-:Systemreset
-Echo THIS CANNOT BE UNDONE!
-Echo Are You Sure?
+:Backup+resetsettings
 cmdMenuSel f870 "Yes" "No"
-if %ERRORLEVEL% == 1 goto Factoryreset
-if %ERRORLEVEL% == 2 goto Settings
+if %ERRORLEVEL% == 1 goto Factoryresetcon
+if %ERRORLEVEL% == 2 goto createBackup
 :Factoryreset
 Echo Preparing to Reset Crenal OSX 
 cd C:\CrenalOS\Versions
@@ -2199,5 +2197,13 @@ robocopy C:\CrenalOS\Versions\OSX C:\CrenalOS\Versions\OSXbackup
 Echo Files Backed up Successfuly
 cd Update+Recovery
 Reset.bat
-
+:createBackup
+cd C:\CrenalOS\Versions
+md OSXbackup
+echo Wait 10 seconds for robocopy to recognise the backup directory
+pause
+robocopy C:\CrenalOS\Versions\OSX C:\CrenalOS\Versions\OSXbackup
+Echo Files Backed up Successfuly
+pause
+Goto Backup+resetsettings
 
