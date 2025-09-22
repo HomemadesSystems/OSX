@@ -1,55 +1,21 @@
 @echo OFF
 :BIOS
-Title BIOS
+
 cls
-Echo enter developer system activation key exactly as given to you
-set /p Choice=Key
-if %Choice% == 23568 goto Approve
-goto lock
-
-
-
-
-:Approve
-cls
-
-
-echo *************************************************************************************************************************************************************************
-
-
-
-
-
-
-
-echo                                                                      Approved!
-
-
-
-
-pause
-cls
-echo CrenalOS X pre beta test release 
+echo CrenalOS X RTM
 timeout /T 2 /NOBREAK >nul
 echo bootmenu
 timeout /T 2 /NOBREAK >nul
-cmdMenuSel f870 "Start" "Classicboot" "lock bootloader" "Recovery"
+cmdMenuSel f870 "Start" "Classicboot" "Recovery"
 if %ERRORLEVEL% == 1 goto yhyhyh
 if %ERRORLEVEL% == 2 goto classic
-if %ERRORLEVEL% == 3 goto BIOS
-if %ERRORLEVEL% == 4 goto vb5656234
+if %ERRORLEVEL% == 3 goto vb5656234
 :yhyhyh
 dir
 cls
-IF EXIST "bootsector.dll" (goto mountcheck
+IF EXIST "bootsector.dll" (goto vircheck
   
 ) ELSE (goto fatalerror
-  
-)
-:mountcheck
-IF EXIST "mount.bat" (goto vircheck
-  
-) ELSE (goto kill
   
 )
 :vircheck
@@ -61,94 +27,295 @@ IF EXIST "virus.dll" (goto Stopexecutionalsafetyfeature
 :smiley
 cls
 echo :)
+IF EXIST "updsndtrg.txt" (goto updbootsound
+  
+) ELSE (goto bootsound
+  
+)
+
+:bootsound
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\startup.mp3" 0
 timeout /T 4 /NOBREAK >nul
-call mount.bat
-cd F:\
+goto HEAD
+:updbootsound
+timeout /T 2 /NOBREAK >nul
+cls
+echo :D
+DEL "updsndtrg.txt"
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\startupupd.mp3" 0
+echo Crenal OS Has Been Updated!
+timeout /T 4 /NOBREAK >nul
 goto HEAD
 :HEAD
 setlocal
-:START
-
-
-set inti=0
-set intk=15
-:STARTTITLE
-title=   CrenalOS Is Starting Up
-set /a inti+=1
 cls
 echo.
 echo.
-echo            ษอออออออออออออออออออออป
-echo            บ                     บ
-echo            บ      CrenalOS X     บ
-echo            บ                     บ
-echo            บ                     บ
-
-if %inti% LSS %intk% (
-      if "%inti%"=="1" (echo            บ   [.............]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 1)
-      if "%inti%"=="2" (echo            บ   [_............]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 2)
-      if "%inti%"=="3" (echo            บ   [__...........]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 3)
-      if "%inti%"=="4" (echo            บ   [___..........]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 4)
-      if "%inti%"=="5" (echo            บ   [____.........]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 5)
-      if "%inti%"=="6" (echo            บ   [_____........]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 6)
-      if "%inti%"=="7" (echo            บ   [______.......]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 7)
-      if "%inti%"=="8" (echo            บ   [_______......]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 8)
-      if "%inti%"=="9" (echo            บ   [________.....]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 9)
-      if "%inti%"=="10" (echo            บ  [_________....]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 10)
-      if "%inti%"=="11" (echo            บ  [__________...]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 11)
-      if "%inti%"=="12" (echo            บ  [___________..]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 12)
-      if "%inti%"=="13" (echo            บ  [____________.]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 13)
-      if "%inti%"=="14" (echo            บ  [_____________]   บ) & (echo            ศอออออออออออออออออออออผ) & (ping -n 1 127.0.0.1>nul) & (GOTO 14)
-)
-
-echo            บ   [_________________]   บ
-echo            ศอออออออออออออออออออออผ
-GOTO 15
-
-:1
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:2
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:3
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:4
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:5
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:6
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:7
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:8
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:9
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:10
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:11
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:12
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:13
-ping -n 1 127.0.0.1>nul
-GOTO STARTTITLE
-:14
-ping -n 2 127.0.0.1>nul
-GOTO STARTTITLE
-:15
 echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Starting System
+echo ---------------------------------------
+echo                                 =   0 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading System Settings
+echo ---------------------------------------
+echo []                              =   5 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading Texty Desktop..         
+echo ---------------------------------------
+echo [][]                            =  15 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading DLLs...        
+echo ---------------------------------------
+echo [][][]                          =  23 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading CrnlSignOn
+echo ---------------------------------------
+echo [][][][]                        =  30 ]
+echo ---------------------------------------
+ping localhost -n 4 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading Driver:Audio
+echo ---------------------------------------
+echo [][][][][]                      =  38 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Starting Texty Shell
+echo ---------------------------------------
+echo [][][][][]                      =  42 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Optimizing Applications
+echo ---------------------------------------
+echo [][][][][][]                    =  45 ]
+echo ---------------------------------------
+ping localhost -n 1 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading Profiles
+echo ---------------------------------------
+echo [][][][][][][]                  =  48 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading ProgmanWin32 
+echo ---------------------------------------
+echo [][][][][][][][]                =  50 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading FileGUI           
+echo ---------------------------------------
+echo [][][][][][][][][]              =  56 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading NoteGUI         
+echo ---------------------------------------
+echo [][][][][][][][][][]            =  63 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading NiceFig
+echo ---------------------------------------
+echo [][][][][][][][][][][]          =  69 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading UpdaterService
+echo ---------------------------------------
+echo [][][][][][][][][][][][]        =  75 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Loading Services 
+echo ---------------------------------------
+echo [][][][][][][][][][][][][]      =  79 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X  
+echo    Beginning To Prepare System
+echo ---------------------------------------
+echo [][][][][][][][][][][][][][]    =  86 ]
+echo ---------------------------------------
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Preparing Applications For Use
+echo ---------------------------------------
+echo [][][][][][][][][][][][][][][]  =  90 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Preparing System For Use
+echo ---------------------------------------
+echo [][][][][][][][][][][][][][][]  =  96 ]
+echo ---------------------------------------
+ping localhost -n 3 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo    Crenal OS X
+echo    Starting CrnlSignOn
+echo ---------------------------------------
+echo [][][][][][][][][][][][][][][][]= 100 ]
+echo ---------------------------------------
+timeout /T 3 /NOBREAK >nul
+
+
+
 
 :MAIN
 
@@ -198,7 +365,6 @@ goto Login
 :login
 title login
 cls
-call soundplayer.bat "C:\Users\Owner\Desktop\vpc m2\ssd\partition 2\sounds\ubuntu\question.wav" 0
 echo ************Welcome!*******************************************************************************************************************************************************
          
 cmdMenuSel f870 "admin" "Login as a guest" "Custom"
@@ -223,7 +389,7 @@ if %ERRORLEVEL% == 3 goto newset
 
 
 
-echo Crenal OS v7.0                                                                                                                                              build 2021
+echo Crenal OS v10.0                                                                                                                                              build 2025.9.20
 
 
 
@@ -233,7 +399,7 @@ echo Crenal OS v7.0                                                             
 
 
 :welcome
-call soundplayer.bat "C:\Users\Owner\Desktop\vpc m2\ssd\partition 2\sounds\ubuntu\startup.wav" 0
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\success.mp3" 0
 
 pause
 cls
@@ -293,7 +459,7 @@ echo                                                                            
 timeout /T 5 /NOBREAK >nul
 cls
 echo                                                                                                          LetsGO!!!!!!!!!!!!!!!!!!
-echo "played">C:\Users\Owner\Desktop\crenalOSbootdisk\played.txt
+echo "played">C:\CrenalOS\Versions\OSX
 timeout /T 5 /NOBREAK >nul
 goto first 2
 
@@ -325,6 +491,7 @@ pause
 :desktop
 cls
 title desktop
+
 echo ___ (hello! %User%************************************************************************************************************************************************************its %DATE% the time is %TIME%)
 
 
@@ -361,15 +528,15 @@ echo 23 rootsetter
 echo 24 settings
 echo 25 progman
 echo 26 scan
-echo or type cmdline for a command line
 echo _________________________________________________________________________________________________________________________________________________________________crenal OS X_________________________________
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\desktop.mp3" 0
 set /p Choice=Open       
 if %Choice% == 1 goto CALC
 if %Choice% == 2 goto TEXT
 if %Choice% == 3 goto BOOT
 if %Choice% == 4 goto shut down
 if %Choice% == 5 goto HELP
-if %Choice% == 6 goto login
+if %Choice% == 6 goto lgoprc
 if %Choice% == 7 goto UPDINF
 if %Choice% == 8 goto FILES
 if %Choice% == 9 goto PASSGEN
@@ -390,8 +557,8 @@ if %Choice% == 23 goto ghghgh
 if %Choice% == 24 goto settings
 if %Choice% == 25 goto progman
 if %Choice% == 26 goto antivirus
-if %Choice% == cmdline goto commandinterpereter
 echo app not found please check the help section and try again
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\error.mp3"
 pause
 goto desktop
 
@@ -602,7 +769,7 @@ cls
 title Password Generator
 echo I will make you a new password.
 echo Please write the password down somewhere in case you forget it.
-echo ----------------------------------------ญ-----------------------
+echo ---------------------------------------- -----------------------
 echo 1) 1 Random Password
 echo 2) 5 Random Passwords
 echo 3) 10 Random Passwords
@@ -656,7 +823,7 @@ if %input%==n goto desktop
 
 
 :yes
-call soundplayer.bat "C:\Users\Owner\Desktop\vpc m2\ssd\partition 2\sounds\ubuntu\shutdown.wav" 0
+call soundplayer.bat "C:\CrenalOS\Version\OSX\sounds\MSN\logoff.mp3" 0
 cls
 echo shuting down
 timeout /T 1 /NOBREAK >nul
@@ -862,7 +1029,9 @@ if %ERRORLEVEL% == 4 goto smiley
 :uuuuuuu
 cls
 
-call soundplayer.bat "C:\Users\Owner\Desktop\vpc m2\ssd\partition 2\sounds\ubuntu\Microsoft Windows XP Error - Sound Effect (HD).mp3" 0
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\error.mp3"
+
+
 
 echo *******************************************************************************************crenal OS********************************************************************
 
@@ -887,9 +1056,9 @@ echo                                      1=restart  2=recovery
 pause
 
 set /p Choice=Command 
-if %Choice% == 1 goto BOOT
+if %Choice% == 1 goto Bios
 
-if %Choice% == 2 goto recovery
+if %Choice% == 2 goto vb5656234
 
 
 
@@ -1218,7 +1387,7 @@ echo.
 pause
 :NEW
 cls
-cd /d C:\Users\admin\Desktop\Batch Files\OS's\crenal OS
+cd /d C:\CrenalOS\Documents
 echo Enter name of the .txt file you want to make. It cannot contain spaces.
 echo. 
 set /p N=Name 
@@ -1228,7 +1397,7 @@ echo %WRITE% > %N%.txt
 goto desktop
 :OPEN
 cls
-cd /d C:\Users\admin\Desktop\Batch Codes\OS's\crenal OS
+cd /d C:\CrenalOS\Versions\OSX\Documents
 echo Type the name of the file you are trying to open.
 set /p file=
 FOR /F "tokens=*" %%i IN (%file%) DO @ECHO %%i
@@ -1237,7 +1406,7 @@ pause
 goto desktop
 :DEL
 cls
-cd /d C:\Users\admin\Desktop\Batch Codes\OS's\crenal OS
+cd /d C:\CrenalOS\Versions\OSX\Documents
 echo Type the name of the file you want to delete.
 set /p delete=
 del %delete%
@@ -1305,7 +1474,7 @@ cls
 title Password Generator
 echo I will make you a new password.
 echo Please write the password down somewhere in case you forget it.
-echo ----------------------------------------ญ-----------------------
+echo ---------------------------------------- -----------------------
 echo 1) 1 Random Password
 echo 2) 5 Random Passwords
 echo 3) 10 Random Passwords
@@ -1770,7 +1939,7 @@ goto BOOT continued
 
 
 :Crenal Chat
-"C:\Users\logan\Desktop\crenal chat\Chat.cmd"
+"C:\CrenalOS\Versions\OSX\Programs\CrenalChat"
 goto desktop
 
 
@@ -1818,7 +1987,7 @@ cls
 color 17
 echo FATAL bootsector.dll is missing 
 pause
-
+end
 
 
 
@@ -1969,13 +2138,16 @@ cmd /k DragonkillOnline.bat
 
 :password
 cls
+
+
 echo Welcome %User%! before you begin we need to verify its you so please enter your password.
 
 
 
 
 
-echo Crenal OS v7.0                        build 2021
+echo Crenal OS v10.0                        build 2025.9.20
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\passwordenter.mp3"
 set /p pass=Password
 if %pass% == wild goto guiselect
 goto password
@@ -2067,12 +2239,12 @@ pause
 goto login
 :settings
 cls
-cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates" "Reset"
+cmdMenuSel f870 "Personalization" "Product key settings" "exit" "Updates" "Backup+Reset"
 if %ERRORLEVEL% == 1 goto personalization
 if %ERRORLEVEL% == 2 goto activator
 if %ERRORLEVEL% == 3 goto desktop
 if %ERRORLEVEL% == 4 goto Updatesettings
-if %ERRORLEVEL% == 5 goto Systemreset
+if %ERRORLEVEL% == 5 goto backupsettings
 :personalization
 cls
 cmdMenuSel f870 "Color" "back" 
@@ -2166,7 +2338,7 @@ set load=
 set/a loadnum=0
 
 :Loading
-set load=%load%Û
+set load=%load% 
 cls
 echo.
 echo CrenalOS is loading files Please Wait...
@@ -2185,12 +2357,10 @@ pause
 cls
 Title Updater
 Updater.bat
-:Systemreset
-Echo THIS CANNOT BE UNDONE!
-Echo Are You Sure?
+:Backup+resetsettings
 cmdMenuSel f870 "Yes" "No"
-if %ERRORLEVEL% == 1 goto Factoryreset
-if %ERRORLEVEL% == 2 goto Settings
+if %ERRORLEVEL% == 1 goto Factoryresetcon
+if %ERRORLEVEL% == 2 goto createBackup
 :Factoryreset
 Echo Preparing to Reset Crenal OSX 
 cd C:\CrenalOS\Versions
@@ -2201,16 +2371,16 @@ robocopy C:\CrenalOS\Versions\OSX C:\CrenalOS\Versions\OSXbackup
 Echo Files Backed up Successfuly
 cd Update+Recovery
 Reset.bat
-:commandinterpereter
-echo please boot a command line
-set /p Choice= %User% [>]
-if %Choice% == cmd goto boot1
-if %Choice% == powershell goto boot2 
-if %Choice% == desktop goto desktop
+:createBackup
+cd C:\CrenalOS\Versions
+md OSXbackup
+echo Wait 10 seconds for robocopy to recognise the backup directory
+pause
+robocopy C:\CrenalOS\Versions\OSX C:\CrenalOS\Versions\OSXbackup
+Echo Files Backed up Successfuly
+pause
+Goto Backup+resetsettings
+:lgoprc
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\logout.mp3" 0
+goto login
 
-:boot1
-echo Loading Cmd
-cmd
-:boot2
-echo Loading Powershell
-powershell
