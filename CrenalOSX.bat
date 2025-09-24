@@ -2,7 +2,7 @@
 :BIOS
 
 cls
-echo CrenalOS X RTM
+echo CrenalOS X
 timeout /T 2 /NOBREAK >nul
 echo bootmenu
 timeout /T 2 /NOBREAK >nul
@@ -34,7 +34,7 @@ IF EXIST "updsndtrg.txt" (goto updbootsound
 )
 
 :bootsound
-call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\startup.mp3" 0
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\startup.mp3" 0 >nul
 timeout /T 4 /NOBREAK >nul
 goto HEAD
 :updbootsound
@@ -42,7 +42,7 @@ timeout /T 2 /NOBREAK >nul
 cls
 echo :D
 DEL "updsndtrg.txt"
-call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\startupupd.mp3" 0
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\startupupd.mp3" 0 >nul
 echo Crenal OS Has Been Updated!
 timeout /T 4 /NOBREAK >nul
 goto HEAD
@@ -334,17 +334,24 @@ timeout /T 1 /NOBREAK >nul
 cls
 echo .
 timeout /T 1 /NOBREAK >nul
-echo press any key to logon
-pause
+echo press any key to begin
+pause >nul
 cls
 echo                                                                                  CrenalOS X
                                                                                      
 pause
 cls
-:MAIN
+:SETUPCHECK
+
+IF EXIST "C:\CrenalOS\Versions\OSX\setup.cfg" (
+    goto BOOTCON
+) ELSE (
+    goto Setup
+    
+)
 
 
-:BOOT continued
+:BOOTCON
 cls
 goto blink
 :blink
@@ -365,9 +372,9 @@ goto Login
 :login
 title login
 cls
-echo ************Welcome!*******************************************************************************************************************************************************
+echo ************Welcome!********************************************************************************************************%TIME%***************************************
          
-cmdMenuSel f870 "admin" "Login as a guest" "Custom"
+cmdMenuSel f870 "Administrator" "Login as a guest" "Login From Card"
 if %ERRORLEVEL% == 1 goto admiset
 if %ERRORLEVEL% == 2 goto gueset
 if %ERRORLEVEL% == 3 goto newset
@@ -399,7 +406,7 @@ echo Crenal OS v10.0                                                            
 
 
 :welcome
-call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\success.mp3" 0
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\success.mp3" 0 >nul
 
 pause
 cls
@@ -427,41 +434,12 @@ timeout /T 5 /NOBREAK >nul
 cls
 echo                                                                               fetching your data                                                                               
 timeout /T 5 /NOBREAK >nul
+goto desktop
 
 
 
 
 
-goto setup animation
-:setup animation
-cls
-IF EXIST "played.txt" (goto Desktop
-  
-) ELSE (goto con
-  
-)
-cls
-:con
-
-
-
-echo                                                                                                         hi!
-timeout /T 5 /NOBREAK >nul
-cls
-echo                                                                                                       were setting things up for you
-timeout /T 5 /NOBREAK >nul
-cls
-echo                                                                                                   getting every thing ready
-echo                                                                                                             do not turn off your pc
-timeout /T 5 /NOBREAK >nul
-cls
-echo                                                                                                         your pc is ready
-timeout /T 5 /NOBREAK >nul
-cls
-echo                                                                                                          LetsGO!!!!!!!!!!!!!!!!!!
-echo "played">C:\CrenalOS\Versions\OSX
-timeout /T 5 /NOBREAK >nul
-goto first 2
 
 
 
@@ -526,10 +504,10 @@ echo 21  smile va
 echo 23 rootsetter
                                                                               echo 22 clickable menu
 echo 24 settings
-echo 25 progman
+                                                                              echo 25 progman
 echo 26 scan
-echo _________________________________________________________________________________________________________________________________________________________________crenal OS X_________________________________
-call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\desktop.mp3" 0
+                                                                              echo 27 System Information echo_________________________________________________________________________________________________________________________________________________________________crenal OS X_________________________________
+call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\desktop.mp3" 0 >nul
 set /p Choice=Open       
 if %Choice% == 1 goto CALC
 if %Choice% == 2 goto TEXT
@@ -557,6 +535,7 @@ if %Choice% == 23 goto ghghgh
 if %Choice% == 24 goto settings
 if %Choice% == 25 goto progman
 if %Choice% == 26 goto antivirus
+if %Choice% == 27 goto sysinf32
 echo app not found please check the help section and try again
 call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\error.mp3"
 pause
@@ -760,7 +739,7 @@ title Files
 echo Here Are All Of The Files Within This Operating System's Drive.
 echo.
 echo.
-cd "C:\Users\logan\Desktop\hdd\C\users\admin"
+cd "C:\CrenalOS\Versions\OSX"
 dir
 pause
 goto desktop
@@ -823,7 +802,7 @@ if %input%==n goto desktop
 
 
 :yes
-call soundplayer.bat "C:\CrenalOS\Version\OSX\sounds\MSN\logoff.mp3" 0
+call soundplayer.bat "C:\CrenalOS\Version\OSX\sounds\MSN\logoff.mp3" 0 >nul
 cls
 echo shuting down
 timeout /T 1 /NOBREAK >nul
@@ -2383,4 +2362,44 @@ Goto Backup+resetsettings
 :lgoprc
 call soundplayer.bat "C:\CrenalOS\Versions\OSX\sounds\MSN\logout.mp3" 0
 goto login
+:sysinf32
+//File Exist Check Goes Here//
+call sysinf32.bat
+pause
+goto desktop
 
+:Setup
+
+@echo off
+title Setup Assistant
+cls
+echo Welcome to Crenal OS X! 
+timeout /T 1 /NOBREAK >nul
+echo This Assistant Will Help You Setup Your New OS.
+echo.
+
+:: Detect PC name
+echo Crenal OS has detected that "%COMPUTERNAME%" is your PC's name.
+echo Would you like to set a custom name for this OS?
+cmdMenuSel f870 "Yes" "No"
+if %ERRORLEVEL% == 1 goto renamepc
+if %ERRORLEVEL% == 2 goto SetupPG2
+
+:renamepc
+set /p PCNAME=Enter new PC name:
+:SetupPG2
+cls
+Echo Next You Will Setup Your User Account (DEVNOTE:Full User Account Support Coming Soon.)
+timeout /T 1 /NOBREAK >nul
+Echo Enter Your Name Or What You'd Like To Be Called And Press Enter
+timeout /T 1 /NOBREAK >nul
+set /p User=Name:
+cls
+Echo Thats All The Information We Need Right Now. Please Wait While We Save Your Answers...
+md C:\CrenalOS\Versions\OSX\Users >nul 2>&1
+echo username=%User% > C:\CrenalOS\Versions\OSX\Users\%User%.cfg
+echo Setup Completed On %DATE% At %TIME% > C:\CrenalOS\Versions\OSX\setup.cfg
+timeout /T 5 /NOBREAK >nul
+echo Setup Completed! You May Now Begin Using Crenal OS X!
+pause
+goto welcome
